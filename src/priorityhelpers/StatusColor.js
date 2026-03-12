@@ -1,0 +1,1 @@
+export const statusColor = (s) => ({ open: "blue", in_progress: "amber", closed: "green" }[s] || "gray");

@@ -1,0 +1,1 @@
+export const statusLabel = (s) => ({ open: "Open", in_progress: "In Progress", closed: "Closed" }[s] || s); 
