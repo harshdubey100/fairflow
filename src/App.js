@@ -13,6 +13,7 @@ import AdminDashboard from './pages/admin/AdminDashboard';
 import CommandCenter from './pages/admin/CommandCenter';
 import Governance from './pages/admin/Governence';
 import Reports from './pages/admin/Reports';
+import ChatBot from './components/shared/ChatBot';
 
 export default function App() {
   const [mode, setMode] = useState("employee");
@@ -57,6 +58,7 @@ export default function App() {
           </main>
         </div>
       </div>
+      <ChatBot />
     </>
   );
 }   

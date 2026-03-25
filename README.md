@@ -1,70 +1,70 @@
-# Getting Started with Create React App
+# FairFlow Premium Dashboard
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+FairFlow is a sophisticated React-powered dashboard designed for employee fairness, task management, and reward systems. It features a modern, aesthetic UI with built-in AI support.
 
-## Available Scripts
+## ✨ Features
 
-In the project directory, you can run:
+- **Employee & Admin Modes**: Seamlessly switch between different user perspectives.
+- **Dynamic Task Tracking**: Comprehensive ticket browsing and creation.
+- **Interactive Rewards System**: Engaging gamification elements.
+- **AI-Powered Assistant**: A state-of-the-art floating chatbot using Hugging Face Inference API.
+- **Premium Aesthetics**: High-quality design with smooth animations, custom icons, and a tailored color palette.
 
-### `npm start`
+## 🤖 AI Capabilities
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The FairFlow AI assistant is built directly into the dashboard, providing real-time support and information using **Mistral-7B-Instruct** (via Hugging Face).
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+To set up the AI:
+1. Create a `.env` file in the root directory.
+2. Add your Hugging Face API token: `REACT_APP_HF_TOKEN=hf_your_token_here`
 
-### `npm test`
+For more detailed AI setup instructions, see [DOCS.md](./DOCS.md).
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🚀 Getting Started
 
-### `npm run build`
+### Prerequisites
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Node.js (v18 or higher)
+- npm or yarn
+- A Hugging Face API Token (optional but recommended for AI features)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Installation
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd fairflow
+   ```
 
-### `npm run eject`
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+3. Configure environment variables (optional):
+   ```bash
+   cp .env.example .env
+   # Edit .env with your HF token
+   ```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+4. Run the development server:
+   ```bash
+   npm start
+   ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Scripts
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- `npm start`: Runs the app in development mode at [http://localhost:3000](http://localhost:3000).
+- `npm run build`: Builds the production-ready bundle.
+- `npm test`: Executes the test suite.
 
-## Learn More
+## 🛠️ Technology Stack
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- **Frontend**: React 19, Framer Motion
+- **Icons**: Lucide React
+- **AI Integration**: Hugging Face Inference API
+- **Styling**: Vanilla CSS with custom tokens
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 📝 License
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

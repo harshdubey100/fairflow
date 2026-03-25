@@ -8,14 +8,14 @@
 
 :root {
   /* theme variables (override from JS if desired) */
-  --bg: #fff;
-  --text: #000;
-  --border: #ddd;
-  --border-strong: #bbb;
-  --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
-  --primary: #3b82f6;
-  --primary-light: #eff6ff;
-  --text-mid: #6b7280;
+  --bg: #060e20;
+  --text: #dee5ff;
+  --border: rgba(109, 117, 140, 0.15);
+  --border-strong: rgba(109, 117, 140, 0.3);
+  --shadow-md: 0 8px 32px rgba(0,0,0,0.2);
+  --primary: #9fa7ff;
+  --primary-light: rgba(159, 167, 255, 0.1);
+  --text-mid: #a3aac4;
 }
 
 body {
