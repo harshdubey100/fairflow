@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import T from '../../tokens/theme';
 import Icon from '../../icons/icons';
 import Avatar from '../../priorityhelpers/Avatar';
@@ -20,10 +21,41 @@ const ADMIN_NAV = [
   { id: "users", label: "Users", icon: "users" },
   { id: "settings", label: "Settings", icon: "settings" },
 ];
- 
 
+const getPath = (id, mode) => {
+  if (mode === 'employee') {
+    switch(id) {
+      case 'emp-dashboard': return '/employee';
+      case 'tickets': return '/employee/tickets';
+      case 'create-ticket': return '/employee/tickets/create';
+      case 'rewards': return '/employee/rewards';
+      case 'performance': return '/employee/performance';
+      case 'profile': return '/employee/profile';
+      default: return '/employee';
+    }
+  } else {
+    switch(id) {
+      case 'admin-dashboard': return '/admin';
+      case 'command-center': return '/admin/command-center';
+      case 'reports': return '/admin/reports';
+      case 'governance': return '/admin/governance';
+      case 'users': return '/admin/users';
+      case 'settings': return '/admin/settings';
+      default: return '/admin';
+    }
+  }
+};
 
-const Sidebar = ({ mode, page, onNavigate, onToggleMode, collapsed, setCollapsed }) => {
+const isActive = (id, mode, pathname) => {
+  const path = getPath(id, mode);
+  if (path === '/') return pathname === '/';
+  return pathname.startsWith(path);
+};
+
+const Sidebar = ({ collapsed, setCollapsed }) => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const mode = location.pathname.startsWith('/admin') ? 'admin' : 'employee';
   const nav = mode === "admin" ? ADMIN_NAV : EMP_NAV;
  
   return (
@@ -59,41 +91,26 @@ const Sidebar = ({ mode, page, onNavigate, onToggleMode, collapsed, setCollapsed
       {/* Nav */}
       <nav style={{ flex: 1, padding: "10px 8px", overflowY: "auto" }}>
         {nav.map(item => (
-          <div key={item.id} className={`nav-link ${page === item.id ? "active" : ""}`}
-            onClick={() => onNavigate(item.id)}
+          <Link key={item.id} to={getPath(item.id, mode)} className={`nav-link ${isActive(item.id, mode, location.pathname) ? "active" : ""}`}
             title={collapsed ? item.label : undefined}
             style={{ justifyContent: collapsed ? "center" : "flex-start" }}
           >
-            <Icon name={item.icon} size={16} color={page === item.id ? T.primary : T.textSoft} />
+            <Icon name={item.icon} size={16} color={isActive(item.id, mode, location.pathname) ? T.primary : T.textSoft} />
             {!collapsed && <span>{item.label}</span>}
-          </div>
+          </Link>
         ))}
       </nav>
- 
-      {/* Mode toggle */}
-      <div style={{ padding: "12px 8px", borderTop: `1px solid ${T.border}` }}>
-        <button onClick={onToggleMode} style={{
-          width: "100%", padding: collapsed ? "8px 0" : "9px 14px",
-          borderRadius: 8, border: `1px solid ${T.border}`,
-          background: mode === "admin" ? T.primaryLight : T.bg,
-          color: mode === "admin" ? T.primary : T.textMid,
-          cursor: "pointer", display: "flex", alignItems: "center",
-          justifyContent: collapsed ? "center" : "flex-start",
-          gap: 8, fontSize: 12, fontWeight: 600, transition: "all 0.15s",
-        }}>
-          <Icon name={mode === "admin" ? "user" : "admin"} size={14} color={mode === "admin" ? T.primary : T.textMid} />
-          {!collapsed && (mode === "admin" ? "Switch to Employee" : "Switch to Admin")}
-        </button>
-        {!collapsed && (
-          <div style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 12, padding: "0 6px" }}>
+      {!collapsed && (
+        <div style={{ padding: "12px 8px", borderTop: `1px solid ${T.border}`, marginTop: "auto" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 8, padding: "0 6px" }}>
             <Avatar initials="AK" size={28} color={T.primary} />
             <div>
               <div style={{ fontSize: 12, fontWeight: 600, color: T.text }}>Alex K.</div>
               <div style={{ fontSize: 10, color: T.textSoft }}>Full Stack Dev</div>
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </aside>
   );
 };

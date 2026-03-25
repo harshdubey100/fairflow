@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import T from '../../tokens/theme';
 import Icon from '../../icons/icons';
 
 // Employee: Create Ticket
-const CreateTicket = ({ onNavigate }) => {
+const CreateTicket = () => {
+  const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [suggestion, setSuggestion] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -23,7 +25,7 @@ const CreateTicket = ({ onNavigate }) => {
  
   return (
     <div className="page" style={{ padding: "28px 32px", maxWidth: 780 }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 6, cursor: "pointer" }} onClick={() => onNavigate("tickets")}>
+      <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 6, cursor: "pointer" }} onClick={() => navigate("/tickets")}>
         <Icon name="chevronRight" size={14} color={T.textSoft} style={{ transform: "rotate(180deg)" }} />
         <span style={{ fontSize: 13, color: T.textSoft }}>Back to Tickets</span>
       </div>
@@ -86,8 +88,8 @@ const CreateTicket = ({ onNavigate }) => {
         </div>
  
         <div style={{ display: "flex", gap: 10, justifyContent: "flex-end" }}>
-          <button className="btn-ghost" onClick={() => onNavigate("tickets")}>Cancel</button>
-          <button className="btn-primary" onClick={() => onNavigate("tickets")}>Create Ticket</button>
+          <button className="btn-ghost" onClick={() => navigate("/tickets")}>Cancel</button>
+          <button className="btn-primary" onClick={() => navigate("/tickets")}>Create Ticket</button>
         </div>
       </div>
     </div>

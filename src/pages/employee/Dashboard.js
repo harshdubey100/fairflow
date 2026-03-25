@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import T from '../../tokens/theme';
 import { TICKETS } from '../../data/tickets';
 import StatWidget from '../../components/shared/StatWidget';
@@ -11,7 +12,8 @@ import { priorityColor } from '../../priorityhelpers/PriorityColor';
 import { statusColor } from '../../priorityhelpers/StatusColor';
 import { statusLabel } from '../../priorityhelpers/StatusLabel';
 
-const EmpDashboard = ({ onNavigate }) => {
+const EmpDashboard = () => {
+  const navigate = useNavigate();
   const [aiAction, setAiAction] = useState(null);
   useEffect(() => { setTimeout(() => setAiAction(TICKETS[0]), 600); }, []);
  
@@ -50,7 +52,7 @@ const EmpDashboard = ({ onNavigate }) => {
               Tackle <strong>{aiAction.id}</strong> first — it's critical priority with a 4.2 difficulty score. Resolving it earns you ~<strong>380 pts</strong>.
             </p>
           </div>
-          <button className="btn-primary" onClick={() => onNavigate("ticket-detail")} style={{ flexShrink: 0, fontSize: 12 }}>
+          <button className="btn-primary" onClick={() => navigate("/employee/tickets/1")} style={{ flexShrink: 0, fontSize: 12 }}>
             Open Ticket →
           </button>
         </div>
@@ -60,11 +62,11 @@ const EmpDashboard = ({ onNavigate }) => {
         {/* Active tickets */}
         <Card style={{ padding: "20px 22px" }}>
           <SectionHeader title="Your Active Tickets" action={
-            <button className="btn-ghost" style={{ fontSize: 12, padding: "6px 12px" }} onClick={() => onNavigate("tickets")}>View all</button>
+            <button className="btn-ghost" style={{ fontSize: 12, padding: "6px 12px" }} onClick={() => navigate("/employee/tickets")}>View all</button>
           } />
           <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
             {TICKETS.filter(t => t.status !== "closed" && t.assignee === "Alex K.").map(t => (
-              <div key={t.id} className="hover-row" onClick={() => onNavigate("ticket-detail")} style={{
+              <div key={t.id} className="hover-row" onClick={() => navigate("/employee/tickets/1")} style={{
                 display: "flex", alignItems: "center", gap: 12,
                 padding: "10px 12px", borderRadius: 8, cursor: "pointer",
                 border: `1px solid ${T.border}`, transition: "background 0.15s",

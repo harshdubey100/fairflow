@@ -1,9 +1,39 @@
 import React from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../contexts/AuthContext';
 import T from '../../tokens/theme';
 import Icon from '../../icons/icons';
 import Avatar from '../../priorityhelpers/Avatar';
 
-const TopBar = ({ page, mode }) => {
+const getPageFromPath = (pathname) => {
+  if (pathname === '/employee' || pathname === '/employee/') return 'emp-dashboard';
+  if (pathname === '/employee/tickets' ) return 'tickets';
+  if (pathname === '/employee/tickets/create') return 'create-ticket';
+  if (pathname.startsWith('/employee/tickets/')) return 'ticket-detail';
+  if (pathname.startsWith('/employee/rewards')) return 'rewards';
+  if (pathname === '/employee/performance') return 'performance';
+  if (pathname === '/employee/profile') return 'profile';
+  if (pathname === '/admin' || pathname === '/admin/') return 'admin-dashboard';
+  if (pathname === '/admin/command-center') return 'command-center';
+  if (pathname.startsWith('/admin/governance')) return 'governance';
+  if (pathname.startsWith('/admin/reports')) return 'reports';
+  if (pathname === '/admin/users') return 'users';
+  if (pathname === '/admin/settings') return 'settings';
+  return 'emp-dashboard';
+};
+
+const TopBar = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { logout } = useAuth();
+  const page = getPageFromPath(location.pathname);
+  const mode = location.pathname.startsWith('/admin') ? 'admin' : 'employee';
+  
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
+  
   const labels = {
     "emp-dashboard": "Dashboard", tickets: "Tickets", "create-ticket": "New Ticket",
     "ticket-detail": "Ticket Detail", rewards: "Rewards", performance: "Performance", profile: "Profile",
@@ -31,7 +61,7 @@ const TopBar = ({ page, mode }) => {
           <span style={{ position: "absolute", top: -2, right: -2, width: 8, height: 8, borderRadius: "50%", background: T.red, border: `2px solid ${T.bgCard}` }} />
         </button>
         <div style={{ height: 24, width: 1, background: T.border }} />
-        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 8, cursor: "pointer" }} onClick={handleLogout}>
           <Avatar initials="AK" size={28} color={T.primary} />
           <span style={{ fontSize: 13, fontWeight: 600, color: T.text }}>Alex K.</span>
           <Icon name="chevronDown" size={14} color={T.textSoft} />

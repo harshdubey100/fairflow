@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import T from '../../tokens/theme';
 import { TICKETS } from '../../data/tickets';
 import Icon from '../../icons/icons';
@@ -9,7 +10,8 @@ import { statusColor } from '../../priorityhelpers/StatusColor';
 import { statusLabel } from '../../priorityhelpers/StatusLabel';
 
 // Employee: Tickets Browse
-const TicketsBrowse = ({ onNavigate }) => {
+const TicketsBrowse = () => {
+  const navigate = useNavigate();
   const [view, setView] = useState("list");
   const [filter, setFilter] = useState("all");
  
@@ -26,7 +28,7 @@ const TicketsBrowse = ({ onNavigate }) => {
           <button className="btn-ghost" style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 12 }}>
             <Icon name="filter" size={13} /> Filter
           </button>
-          <button className="btn-primary" style={{ display: "flex", alignItems: "center", gap: 6 }} onClick={() => onNavigate("create-ticket")}>
+          <button className="btn-primary" style={{ display: "flex", alignItems: "center", gap: 6 }} onClick={() => navigate("/employee/tickets/create")}>
             <Icon name="plus" size={13} /> New Ticket
           </button>
         </div>
@@ -68,7 +70,7 @@ const TicketsBrowse = ({ onNavigate }) => {
             </thead>
             <tbody>
               {filtered.map((t, i) => (
-                <tr key={t.id} className="hover-row" onClick={() => onNavigate("ticket-detail")} style={{ borderBottom: i < filtered.length - 1 ? `1px solid ${T.border}` : "none", cursor: "pointer" }}>
+                <tr key={t.id} className="hover-row" onClick={() => navigate("/employee/tickets/1")} style={{ borderBottom: i < filtered.length - 1 ? `1px solid ${T.border}` : "none", cursor: "pointer" }}>
                   <td className="mono" style={{ padding: "12px 16px", fontSize: 12, color: T.primary, fontWeight: 500 }}>{t.id}</td>
                   <td style={{ padding: "12px 16px", fontSize: 13, color: T.text, fontWeight: 500, maxWidth: 280 }}>
                     <div style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{t.title}</div>
@@ -95,7 +97,7 @@ const TicketsBrowse = ({ onNavigate }) => {
       ) : (
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 14 }}>
           {filtered.map((t, i) => (
-            <Card key={t.id} className="fade-up" style={{ padding: "18px 20px", animationDelay: `${i * 0.04}s`, cursor: "pointer" }} onClick={() => onNavigate("ticket-detail")}>
+            <Card key={t.id} className="fade-up" style={{ padding: "18px 20px", animationDelay: `${i * 0.04}s`, cursor: "pointer" }} onClick={() => navigate("/employee/tickets/1")}>
               <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 10 }}>
                 <span className="mono" style={{ fontSize: 11, color: T.primary, fontWeight: 600 }}>{t.id}</span>
                 <Badge label={statusLabel(t.status)} color={statusColor(t.status)} />
