@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import T from '../../tokens/theme';
 import { TICKETS } from '../../data/tickets';
 import { COMMENTS } from '../../data/comments';
@@ -14,8 +13,7 @@ import { statusColor } from '../../priorityhelpers/StatusColor';
 import { statusLabel } from '../../priorityhelpers/StatusLabel';
 
 // Employee: Ticket Detail (The Workhorse)
-const TicketDetail = () => {
-  const navigate = useNavigate();
+const TicketDetail = ({ onNavigate }) => {
   const ticket = TICKETS[0];
   const comments = COMMENTS;
   const [reply, setReply] = useState("");
@@ -43,9 +41,9 @@ const TicketDetail = () => {
     <div className="page" style={{ padding: "28px 32px", maxWidth: 1100 }}>
       {/* Breadcrumb */}
       <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 16, fontSize: 12, color: T.textSoft }}>
-        <span style={{ cursor: "pointer", color: T.primary }} onClick={() => navigate("/dashboard")}>Dashboard</span>
+        <span style={{ cursor: "pointer", color: T.primary }} onClick={() => onNavigate("emp-dashboard")}>Dashboard</span>
         <Icon name="chevronRight" size={12} />
-        <span style={{ cursor: "pointer", color: T.primary }} onClick={() => navigate("/tickets")}>Tickets</span>
+        <span style={{ cursor: "pointer", color: T.primary }} onClick={() => onNavigate("tickets")}>Tickets</span>
         <Icon name="chevronRight" size={12} />
         <span className="mono">{ticket.id}</span>
       </div>
